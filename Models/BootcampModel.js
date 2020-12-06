@@ -102,7 +102,7 @@ const BootcampSchema = new mongoose.Schema({
    },
 });
 
-// A Mongoose pre middleware.
+// A Mongoose pre middlewares.
 BootcampSchema.pre('save', function (next) {
    this.slug = slugify(this.name, {
       lower: true,
