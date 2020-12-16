@@ -13,7 +13,7 @@ You have to rename the config/config.env.env file to 'config/config.env' and upd
 npm install
 ```
 
-##Run App
+## Run App
 
 #### To run in developer mode
 
