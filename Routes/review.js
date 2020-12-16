@@ -1,15 +1,15 @@
 const express = require('express');
 const {
-    getCourses,
-    getCourse,
-    createCourse,
-    updateCourse,
-    deleteCourse,
-} = require('../controllers/coursesController');
+    getReviews,
+    getReview,
+    addReview,
+    updateReview,
+    deleteReview,
+} = require('../controllers/reviewController');
 
 // Middleware for advanced search results
 const advancedResults = require('../middleware/advancedResult');
-const Course = require('../Models/CourseModel');
+const Review = require('../Models/ReviewModel');
 // protect middleware
 const { protect, authorize } = require('../middleware/auth');
 const router = express.Router({ mergeParams: true });
@@ -17,17 +17,17 @@ const router = express.Router({ mergeParams: true });
 router
     .route('/')
     .get(
-        advancedResults(Course, {
+        advancedResults(Review, {
             path: 'bootcamp',
             select: 'name description',
         }),
-        getCourses
+        getReviews
     )
-    .post(protect, authorize('publisher', 'admin'), createCourse);
+    .post(protect, authorize('user', 'admin'), addReview);
 router
     .route('/:id')
-    .get(getCourse)
-    .put(protect, authorize('publisher', 'admin'), updateCourse)
-    .delete(protect, authorize('publisher', 'admin'), deleteCourse);
+    .get(getReview)
+    .put(protect, authorize('user', 'admin'), updateReview)
+    .delete(protect, authorize('user', 'admin'), deleteReview);
 
 module.exports = router;
